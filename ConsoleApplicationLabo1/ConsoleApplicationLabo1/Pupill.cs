@@ -8,11 +8,15 @@ namespace ConsoleApplicationLabo1
 {
     public class Pupil : Person
     {
-        public int Grade { get; set; }
-        private List<Activity> lstActivities;
-        public char[] TabEval { get; set; }
+        //private List<Activity> lstActivities;
+        //public char[] pupilEvaluations { get; set; }
 
-        internal List<Activity> LstActivities
+
+        public int Grade { get; set; }
+        
+        public Dictionary<String,char> PupilActivities { get; set; }
+
+       /* internal List<Activity> LstActivities
         {
             get
             {
@@ -23,61 +27,91 @@ namespace ConsoleApplicationLabo1
             {
                 lstActivities = value;
             }
-        }
+        }*/
 
         public Pupil(String name, int age, int grade) : base(name, age)
         {
             Grade = grade;
-            LstActivities = new List<Activity>();
-            TabEval = new char[10];
-         }
+            //LstActivities = new List<Activity>();
+            //pupilEvaluations = new char[10];
+            PupilActivities = new Dictionary<String, char>();
+        }
         public Pupil(String name, int age) : this(name, age,1)
         {
-            
-            LstActivities = new List<Activity>();
-            TabEval = new char[10];
 
+            //LstActivities = new List<Activity>();
+            //pupilEvaluations = new char[10];
+            PupilActivities = new Dictionary<String, char>();
         }
-        public void AddActivity(Activity activity)
+        public void AddActivity(String activity)
         {
-            LstActivities.Add(activity);
+            //LstActivities.Add(activity);
+            PupilActivities.Add(activity,'0');
         }
         public override string ToString()
         {
-            string ch = base.ToString();
-            int i = 0;
-            int cptActivities = LstActivities.Count();
+            string ch = Header();
+            ch = PrintActivities(ch);
+            return ch;
+        }
+        private String Header()
+        {
+            return base.ToString();
+        }
+
+        private string PrintActivities(String ch)
+        {
+            
+            /*int cptActivities = LstActivities.Count();
+            
             if (cptActivities == 0)
             {
-                ch += "n'a pas encore choisi d'activité";
+                ch += "n'a pas encore choisi d'activité\n";
             }
             else
             {
                 ch += "a choisi les activités suivantes:";
-                foreach(Activity activity in LstActivities)
+                foreach (Activity activity in LstActivities)
                 {
                     ch += activity;
-                    if(TabEval[i] != '\0')
+                    if (pupilEvaluations[i] != '\0')
                     {
-                        ch += " a obtenu le grade : " + TabEval[i];
+                        ch += " a obtenu le grade : " + pupilEvaluations[i];
                     }
                     ch += "\n";
-                    
+
                     i++;
+                }
+            }
+            */
+            int cptActivities = PupilActivities.Count();
+            if(cptActivities == 0)
+            {
+                ch += "n'a pas encore choisi d'activité\n";
+            }
+            else
+            {
+                ch += "a choisi les activités suivantes:";
+                for(int i = 0;i > cptActivities;i++)
+                {
+                    ch += PupilActivities.ElementAt(i).Key.ToString() + " : " + PupilActivities.ElementAt(i).Value + "\n"; 
                 }
             }
             return ch;
         }
+
         public void AddEvaluation(String title = null, char evaluation= 'S')
         {
-            int i = 0;
+            
             if(title != null)
             {
-                while (!LstActivities[i].Title.Equals(title))
-                {
-                    i++;
-                }
-                TabEval[i] = evaluation;
+                /* while (!LstActivities[i].Title.Equals(title))
+                 {
+                     i++;
+                 }
+                 pupilEvaluations[i] = evaluation;*/
+                //PupilActivities.Add(title, evaluation);
+                PupilActivities[title] = evaluation;
             }
                                
         } 
