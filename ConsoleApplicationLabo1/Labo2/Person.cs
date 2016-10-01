@@ -18,7 +18,7 @@ namespace Labo2
         }
         public override String ToString()
         {
-            return Name + " " + LastName;
+            return "-"+Name + " " + LastName + " ";
         }
         public abstract bool HasHisBirthday();
 
